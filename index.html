@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy One Month, Baby!</title>
-  <link rel="icon" type="image/png" href="heart-favicon.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -47,10 +46,6 @@
     @keyframes explode {
       0% { transform: scale(1); opacity: 1; }
       100% { transform: scale(1.5); opacity: 0; }
-    }
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      100% { opacity: 0; }
     }
     .reason-card {
       position: relative;
@@ -118,7 +113,6 @@
       opacity: 0;
       transform: translateY(100px);
       transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-      position: relative;
     }
     #mainContent.visible {
       opacity: 1;
@@ -131,50 +125,16 @@
       font-size: 1rem;
       animation: explode 1s ease-out forwards;
     }
-    #loadingMessage {
-      position: absolute;
-      top: 50%;
-      transform: translateY(100px);
-      color: #ec4899;
-      font-size: 1.5rem;
-      font-weight: 600;
-      opacity: 1;
-      transition: opacity 0.5s;
-    }
-    #welcomeMessage {
-      position: absolute;
-      top: 10px;
-      width: 100%;
-      text-align: center;
-      color: #ec4899;
-      font-size: 1.5rem;
-      font-weight: 600;
-      opacity: 0;
-      transition: opacity 0.5s;
-    }
-    #welcomeMessage.visible {
-      opacity: 1;
-    }
-    #confettiCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 50;
-    }
   </style>
 </head>
 <body class="relative">
   <!-- Intro Page -->
   <div id="introPage">
-    <div id="heart" aria-label="Tap to start">💗</div>
+    <div id="heart">💗</div>
     <p class="text-2xl text-pink-600 font-semibold mt-4">Tap the Heart, Baby 💗</p>
-    <div id="loadingMessage" class "hidden">Crafting our love story, Akshu...</div>
   </div>
   <!-- Main Content -->
   <div id="mainContent">
-    <div id="welcomeMessage" class="hidden">Akshu, this is our love story 💗</div>
-    <canvas id="confettiCanvas"></canvas>
     <!-- Falling emojis -->
     <script>
       const emojis = ['💖','❤️','💞','❣️','💗'];
@@ -243,7 +203,7 @@
           <button class="nav-arrow right-0 bg-pink-500 text-white rounded-full w-10 h-10 flex items-center justify-center" onclick="scrollReasons(200)" aria-label="Scroll right">→</button>
         </div>
         <!-- Pop-up Modal -->
-        <div id="reasonModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50" role="dialog" aria-labelledby="reasonText">
+        <div id="reasonModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
           <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm text-center pop-animation">
             <p id="reasonText" class="text-pink-600 text-lg font-medium"></p>
             <p class="text-pink-500 mt-2">💗 Forever yours 💗</p>
@@ -254,7 +214,7 @@
       <section class="mb-8 text-center">
         <button id="secretBtn" class="mt-6 px-6 py-3 bg-pink-500 text-white rounded-full text-lg hover:bg-pink-600 transition duration-300 shadow-lg hover:scale-105">Click me if you want to know a secret...</button>
         <div id="secretMessage" class="mt-4 text-xl text-pink-700 font-semibold hidden transition-opacity duration-500">
-          I love you more every day, and I’m not planning on stopping anytime soon, and I'll never leave my baby girl.
+          I love you more every day, and I’m not planning on stopping anytime soon , and I'll never leave my baby girl.
         </div>
       </section>
       <footer class="text-center py-4 text-sm text-gray-500">
@@ -263,59 +223,14 @@
     </div>
   </div>
   <script>
-    // Intro Page Animation with Loading Message
+    // Intro Page Animation
     const introPage = document.getElementById('introPage');
     const mainContent = document.getElementById('mainContent');
     const heart = document.getElementById('heart');
-    const loadingMessage = document.getElementById('loadingMessage');
-    const welcomeMessage = document.getElementById('welcomeMessage');
     heart.addEventListener('click', () => {
-      loadingMessage.classList.remove('hidden');
-      setTimeout(() => {
-        introPage.classList.add('hidden');
-        mainContent.classList.add('visible');
-        welcomeMessage.classList.add('visible');
-        createConfetti();
-        setTimeout(() => welcomeMessage.classList.remove('visible'), 3000);
-      }, 500);
+      introPage.classList.add('hidden');
+      mainContent.classList.add('visible');
     });
-
-    // Confetti Animation
-    function createConfetti() {
-      const canvas = document.getElementById('confettiCanvas');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const ctx = canvas.getContext('2d');
-      const particles = [];
-      for (let i = 0; i < 30; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 5,
-          vy: Math.random() * 5 - 5,
-          opacity: 1,
-        });
-      }
-      function animateConfetti() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-          p.x += p.vx;
-          p.y += p.vy;
-          p.opacity -= 0.01;
-          if (p.opacity > 0) {
-            ctx.font = '16px Arial';
-            ctx.fillStyle = `rgba(236, 72, 153, ${p.opacity})`;
-            ctx.fillText('💗', p.x, p.y);
-          }
-        });
-        if (particles.some(p => p.opacity > 0)) {
-          requestAnimationFrame(animateConfetti);
-        } else {
-          canvas.style.display = 'none';
-        }
-      }
-      animateConfetti();
-    }
 
     // Falling Emojis and Other Existing Scripts
     const secretBtn = document.getElementById('secretBtn');
@@ -384,7 +299,7 @@
             if (p.opacity > 0) {
               ctx.font = '16px Arial';
               ctx.fillStyle = `rgba(236, 72, 153, ${p.opacity})`;
-              ctx.fillText('💗', p.x, p.y);
+              ctx.fillText('💕', p.x, p.y);
             }
           });
           if (particles.some(p => p.opacity > 0)) {
