@@ -29,6 +29,18 @@
         opacity: 0;
       }
     }
+    @keyframes breakMeter {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      50% { transform: translateX(10px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(5px); }
+    }
+    .break-animation {
+      animation: breakMeter 0.5s ease-in-out;
+      width: 105% !important;
+      border: 2px dashed #e11d48 !important;
+    }
   </style>
 </head>
 <body class="relative">
@@ -59,7 +71,7 @@
     <section class="mb-8">
       <h2 class="text-2xl font-semibold text-pink-500 mb-4">From Me to You</h2>
       <p class="bg-white p-5 rounded-xl shadow text-gray-800 hover:shadow-lg transition duration-300">
-        Akshu, in just 30 days, you've brought a kind of warmth and joy into my life that words can barely explain. Even though we're far apart, you make my world feel close and full. This is just the beginning of something so special. I'm  so lucky that i cna call you mine.
+        Akshu, in just 30 days, you've brought a kind of warmth and joy into my life that words can barely explain. Even though we're far apart, you make my world feel close and full. This is just the beginning of something so special. I’m feel so  lucky that i can call you mine.
       </p>
       <div class="mt-4 text-center text-pink-600 font-medium">
         I wish I could be with you in person today. But until then, here’s a little corner of the internet that’s just for us.
@@ -69,13 +81,13 @@
       <h2 class="text-2xl font-semibold text-pink-500 mb-2">Our Song</h2>
       <p class="text-gray-700">Because to me, you really <span class="italic">are</span> what makes life beautiful.</p>
       <div class="mt-4 rounded-xl overflow-hidden shadow hover:shadow-xl transition duration-300">
-        <iframe src="https://open.spotify.com/embed/track/0y60itmpH0aPKsFiGxmtnh?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe src="https://open.spotify.com/embed/track/4cluDES4hQEUhmXj6TXkSo?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
     </section>
     <!-- Love Meter Section -->
     <section class="mb-8 text-center">
       <h2 class="text-2xl font-semibold text-pink-500 mb-4">Our Love Meter</h2>
-      <div class="w-full bg-pink-100 rounded-full h-6">
+      <div class="w-full bg-pink-100 rounded-full h-6 overflow-hidden">
         <div id="loveMeter" class="bg-pink-500 h-6 rounded-full transition-all duration-2000" style="width: 0%"></div>
       </div>
       <button onclick="fillMeter()" class="mt-4 px-6 py-3 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition duration-300 shadow-lg hover:scale-105">Check Our Love!</button>
@@ -87,13 +99,13 @@
       <div class="flex overflow-x-auto space-x-4 snap-x pb-4">
         <div class="snap-center flex-shrink-0 w-64 bg-white rounded-xl shadow p-4 text-center hover:scale-105 transition">You make my heart smile.</div>
         <div class="snap-center flex-shrink-0 w-64 bg-white rounded-xl shadow p-4 text-center hover:scale-105 transition">Your voice feels like home.</div>
-        <div class="snap-center flex-shrink-0 w-64 bg-white rounded-xl shadow p-4 text-center hover:scale-105 transition">You're my cute baby girl.</div>
+        <div class="snap-center flex-shrink-0 w-64 bg-white rounded-xl shadow p-4 text-center hover:scale-105 transition">You're mine cute baby girl.</div>
         <div class="snap-center flex-shrink-0 w-64 bg-white rounded-xl shadow p-4 text-center hover:scale-105 transition">You make distance feel shorter.</div>
         <div class="snap-center flex-shrink-0 w-64 bg-white rounded-xl shadow p-4 text-center hover:scale-105 transition">You're effortlessly cute.</div>
         <div class="snap-center flex-shrink-0 w-64 bg-white rounded-xl shadow p-4 text-center hover:scale-105 transition">I feel happy with you, even from afar.</div>
         <div class="snap-center flex-shrink-0 w-64 bg-white rounded-xl shadow p-4 text-center hover:scale-105 transition">You bring light into my days.</div>
         <div class="snap-center flex-shrink-0 w-64 bg-white rounded-xl shadow p-4 text-center hover:scale-105 transition">Your smile is addictive.</div>
-        <div class="snap-center flex-shrink-0 w-64 bg-white rounded-xl shadow p-4 text-center hover:scale-105 transition">You're my wifeeeeeee.</div>
+        <div class="snap-center flex-shrink-0 w-64 bg-white rounded-xl shadow p-4 text-center hover:scale-105 transition">You're my wifeeeee.</div>
         <div class="snap-center flex-shrink-0 w-64 bg-white rounded-xl shadow p-4 text-center hover:scale-105 transition">You're the best part of my every day.</div>
       </div>
     </section>
@@ -116,10 +128,17 @@
     });
     function fillMeter() {
       const meter = document.getElementById('loveMeter');
+      const meterText = document.getElementById('meterText');
+      // Fill to 100%
       meter.style.width = '100%';
+      // After fill, trigger break animation
       setTimeout(() => {
-        document.getElementById('meterText').textContent = "Our love is off the charts, Akshu!";
-      }, 2000);
+        meter.classList.add('break-animation');
+        // After break animation, show infinite message
+        setTimeout(() => {
+          meterText.textContent = "Akshu, our love broke the meter—it's infinite and beyond! 💖";
+        }, 500); // Matches break animation duration
+      }, 2000); // Matches fill animation duration
     }
   </script>
 </body>
